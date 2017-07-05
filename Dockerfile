@@ -5,7 +5,6 @@ RUN mkdir -p $INSTALL_PATH
 WORKDIR $INSTALL_PATH
 ADD Gemfile* $INSTALL_PATH/
 RUN bundle install
-RUN test -f $INSTALL_PATH/tmp/pids/server.pid && rf $INSTALL_PATH/tmp/pids/server.pid; true
-
+RUN test -f $INSTALL_PATH/tmp/pids/server.pid && rm $INSTALL_PATH/tmp/pids/server.pid; true
 ADD . $INSTALL_PATH
 CMD ["bundle", "exec", "rails", "s", "-p", "3000", "-b", "0.0.0.0"]
